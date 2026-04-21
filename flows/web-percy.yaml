@@ -6,6 +6,8 @@ url: https://percy.io
     env:
       PERCY_SNAPSHOT_NAME: "percy-home"
       PERCY_SNAPSHOT_WIDTHS: "375,1280"
+      PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
+      PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
 
 - scroll
 - runScript:
@@ -13,3 +15,5 @@ url: https://percy.io
     env:
       PERCY_SNAPSHOT_NAME: "percy-home-scrolled"
       PERCY_SNAPSHOT_WIDTHS: "375,1280"
+      PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
+      PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
