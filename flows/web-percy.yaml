@@ -1,28 +1,123 @@
+# Comprehensive Percy + Maestro demo flow.
+#
+# Captures 9 snapshots across 4 test-case groups, exercising every
+# feature of the @percy/maestro SDK that's available to Selenium /
+# Playwright SDK users. Open the resulting build in Percy — every
+# review-page feature (diffs, browser/width toggles, test cases,
+# labels, similar diffs, region overlays) should light up.
+
 url: https://percy.io
 ---
 - launchApp
+
+# =============================================================================
+# Test Case 1 — Homepage smoke (3 snapshots)
+# Exercises: multi-width, labels, multi-viewport rendering
+# =============================================================================
+
 - runScript:
     file: ../node_modules/@percy/maestro/scripts/snapshot.js
     env:
-      PERCY_SNAPSHOT_NAME: "percy-home"
-      PERCY_SNAPSHOT_WIDTHS: "375,1280"
-      PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
-      PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
-      # Unified regions (modern Percy API). Each entry declares its own
-      # algorithm (ignore | layout | standard | intelliignore) and a
-      # selector (boundingBox / elementXpath / elementCSS). Percy uses
-      # boundingBox {x, y, width, height} — not top/left.
-      PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}}}]'
+      PERCY_SNAPSHOT_NAME: "homepage-hero"
+      PERCY_SNAPSHOT_WIDTHS: "375,768,1280"
+      PERCY_SNAPSHOT_TEST_CASE: "homepage-smoke"
+      PERCY_SNAPSHOT_LABELS: "smoke,critical-path,hero"
 
 - scroll
 - runScript:
     file: ../node_modules/@percy/maestro/scripts/snapshot.js
     env:
-      PERCY_SNAPSHOT_NAME: "percy-home-scrolled"
+      PERCY_SNAPSHOT_NAME: "homepage-features-section"
       PERCY_SNAPSHOT_WIDTHS: "375,1280"
-      PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
-      PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
-      # Mix selector types — CSS selector + "layout" algorithm (treats
-      # layout shifts within the selected element as noise rather than
-      # flagging them as diffs).
+      PERCY_SNAPSHOT_TEST_CASE: "homepage-smoke"
+      PERCY_SNAPSHOT_LABELS: "smoke,features"
+
+- scroll
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "homepage-footer-area"
+      PERCY_SNAPSHOT_WIDTHS: "375,1280"
+      PERCY_SNAPSHOT_TEST_CASE: "homepage-smoke"
+      PERCY_SNAPSHOT_LABELS: "smoke,footer"
+
+# =============================================================================
+# Test Case 2 — Regions demo (3 snapshots)
+# Exercises: ignore / layout / intelliignore algorithms,
+# boundingBox / CSS / XPath selectors, padding, region configuration
+# =============================================================================
+
+- scrollUntilVisible:
+    element: "Your all-in-one visual review platform"
+    direction: UP
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "regions-ignore-by-box"
+      PERCY_SNAPSHOT_WIDTHS: "1280"
+      PERCY_SNAPSHOT_TEST_CASE: "regions-demo"
+      PERCY_SNAPSHOT_LABELS: "regions,ignore,boundingBox"
+      # Ignore the top 80px promo banner via coordinate-based boundingBox
+      PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}},"padding":{"top":4,"right":4,"bottom":4,"left":4}}]'
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "regions-layout-by-css"
+      PERCY_SNAPSHOT_WIDTHS: "1280"
+      PERCY_SNAPSHOT_TEST_CASE: "regions-demo"
+      PERCY_SNAPSHOT_LABELS: "regions,layout,cssSelector"
+      # Treat layout shifts inside <footer> as noise (CSS selector + layout algorithm)
       PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}}]'
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "regions-intelliignore-configured"
+      PERCY_SNAPSHOT_WIDTHS: "1280"
+      PERCY_SNAPSHOT_TEST_CASE: "regions-demo"
+      PERCY_SNAPSHOT_LABELS: "regions,intelliignore,configured"
+      # Intelliignore algorithm with explicit tuning: ignore carousels/banners/ads,
+      # sensitivity at 0.5, scoped to the top 600px of the page.
+      PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"intelliignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":600}},"configuration":{"diffSensitivity":1,"imageIgnoreThreshold":0.1,"carouselsEnabled":true,"bannersEnabled":true,"adsEnabled":true},"assertion":{"diffIgnoreThreshold":0.1}}]'
+
+# =============================================================================
+# Test Case 3 — Responsive + style customization (2 snapshots)
+# Exercises: responsiveSnapshotCapture (DOM re-capture per viewport),
+# percyCSS, minHeight, enableJavaScript
+# =============================================================================
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "responsive-dom-capture"
+      PERCY_SNAPSHOT_WIDTHS: "375,768,1280"
+      PERCY_SNAPSHOT_RESPONSIVE: "true"
+      PERCY_SNAPSHOT_MIN_HEIGHT: "1200"
+      PERCY_SNAPSHOT_TEST_CASE: "responsive-demo"
+      PERCY_SNAPSHOT_LABELS: "responsive,viewport-emulation"
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "custom-percyCSS"
+      PERCY_SNAPSHOT_WIDTHS: "1280"
+      PERCY_SNAPSHOT_TEST_CASE: "responsive-demo"
+      PERCY_SNAPSHOT_LABELS: "percyCSS,style-override"
+      PERCY_SNAPSHOT_ENABLE_JS: "false"
+      # Tint the page background via percyCSS injection (rendered only in Percy, not in Chromium)
+      PERCY_SNAPSHOT_PERCY_CSS: "body { background: #fff7ed !important; } .cta { outline: 3px solid magenta !important; }"
+
+# =============================================================================
+# Test Case 4 — Scoped snapshot (1 snapshot)
+# Exercises: scope (capture only a subtree of the DOM)
+# =============================================================================
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      PERCY_SNAPSHOT_NAME: "scoped-navbar-only"
+      PERCY_SNAPSHOT_WIDTHS: "1280"
+      PERCY_SNAPSHOT_TEST_CASE: "scoped-demo"
+      PERCY_SNAPSHOT_LABELS: "scope,partial-dom"
+      PERCY_SNAPSHOT_SCOPE: "nav"
