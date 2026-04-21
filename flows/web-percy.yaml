@@ -8,6 +8,11 @@ url: https://percy.io
       PERCY_SNAPSHOT_WIDTHS: "375,1280"
       PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
       PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
+      # Unified regions (modern Percy API). Each entry declares its own
+      # algorithm (ignore | layout | standard | intelliignore) and a
+      # selector (boundingBox / elementXpath / elementCSS). Percy uses
+      # boundingBox {x, y, width, height} — not top/left.
+      PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}}}]'
 
 - scroll
 - runScript:
@@ -17,3 +22,7 @@ url: https://percy.io
       PERCY_SNAPSHOT_WIDTHS: "375,1280"
       PERCY_SNAPSHOT_TEST_CASE: "homepage-flow"
       PERCY_SNAPSHOT_LABELS: "smoke,critical-path"
+      # Mix selector types — CSS selector + "layout" algorithm (treats
+      # layout shifts within the selected element as noise rather than
+      # flagging them as diffs).
+      PERCY_SNAPSHOT_REGIONS: '[{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}}]'
