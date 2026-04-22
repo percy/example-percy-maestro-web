@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Percy Maestro — Cross-origin Iframe Demo</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, sans-serif; color: #0f172a; }
+    body { margin: 0; padding: 32px; max-width: 900px; background: #f8fafc; }
+    h1 { font-size: 28px; color: #1e293b; margin: 0 0 8px; }
+    .lede { color: #475569; margin: 0 0 32px; line-height: 1.5; }
+    h2 { font-size: 18px; color: #1e293b; margin: 32px 0 8px; }
+    .caption { color: #64748b; font-size: 13px; margin: 0 0 12px; }
+    iframe { display: block; width: 100%; min-height: 280px; border: 2px solid #3b82f6; border-radius: 6px; background: white; }
+    .meta { margin-top: 24px; padding: 16px; background: white; border-left: 3px solid #10b981; font-family: ui-monospace, monospace; font-size: 13px; color: #334155; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Percy Maestro — cross-origin iframe serialization demo</h1>
+  <p class="lede">This page is served from <code>localhost:8000</code>. Each iframe below points to a different external origin. When Percy's SDK captures this page, its capture server uses CDP <code>Target.getTargets</code> + <code>Target.attachToTarget</code> to enumerate the iframe execution contexts, injects <code>@percy/dom</code> into each, serializes the iframe DOM, and attaches the result under <code>domSnapshot.corsIframes</code> — identical behavior to <code>@percy/playwright</code>.</p>
+
+  <h2>Iframe 1 — <code>httpbin.org/html</code></h2>
+  <p class="caption">Sample HTML page; different origin from localhost</p>
+  <iframe src="https://httpbin.org/html" title="httpbin-html"></iframe>
+
+  <h2>Iframe 2 — <code>jsonplaceholder.typicode.com</code></h2>
+  <p class="caption">JSON placeholder API home; another different origin</p>
+  <iframe src="https://jsonplaceholder.typicode.com/" title="jsonplaceholder-home" style="min-height: 400px;"></iframe>
+
+  <div class="meta">Expected Percy payload (simplified):
+{
+  "name": "cors-iframe-page",
+  "domSnapshot": {
+    "html": "&lt;...main page...&gt;",
+    "corsIframes": [
+      { "frameUrl": "https://httpbin.org/html", "iframeData": { "percyElementId": "..." }, "iframeSnapshot": { ... } },
+      { "frameUrl": "https://jsonplaceholder.typicode.com/", "iframeData": { "percyElementId": "..." }, "iframeSnapshot": { ... } }
+    ]
+  }
+}</div>
+</body>
+</html>

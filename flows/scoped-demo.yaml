@@ -1,0 +1,16 @@
+# Scoped snapshot demo — capture only a subtree of the DOM, not the full
+# page. The scope is a CSS selector; only that element and its
+# descendants are serialized.
+
+url: https://percy.io
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "scoped-navbar-only"
+      TEST_CASE: "scoped-demo"
+      LABELS: "scope,partial-dom,nav-only"
+      SCOPE: "nav"
+      PERCY_CSS: "nav { background: linear-gradient(90deg, #fef3c7, #fbbf24) !important; outline: 2px solid #3b82f6 !important; }"

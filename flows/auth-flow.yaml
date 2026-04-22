@@ -1,0 +1,32 @@
+# Navigation / multi-page flow demo.
+#
+# Shows a flow moving between two pages of the same app (the login form
+# and the post-login success page) and taking a snapshot at each. The
+# SDK captures cookies via CDP Network.getAllCookies at each snapshot
+# and forwards them in the Percy payload, so session state that
+# accumulates during a flow is preserved in the build.
+#
+# Note: Maestro's web driver interaction (tapping form submit buttons)
+# is still in beta and not always reliable. We demonstrate the
+# navigation via `openLink:` — real login is a simple extension once
+# upstream Maestro's web interaction stabilizes.
+
+url: https://practicetestautomation.com/practice-test-login/
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "page-login-form"
+      TEST_CASE: "multi-page-nav"
+      LABELS: "auth,login-form,page-1"
+
+- openLink: https://practicetestautomation.com/logged-in-successfully/
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "page-logged-in-success"
+      TEST_CASE: "multi-page-nav"
+      LABELS: "auth,authenticated-state,page-2,cookies-captured"

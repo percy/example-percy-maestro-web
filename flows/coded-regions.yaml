@@ -1,0 +1,20 @@
+# Coded regions demo — the REGIONS env var below is the JSON output of
+# running `node scripts/build-regions.js` (see that file for the source
+# using createRegion() programmatically). Users can generate region
+# arrays in Node and paste the JSON into the YAML env, or generate the
+# whole YAML file dynamically.
+
+url: https://percy.io
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "coded-regions-demo"
+      TEST_CASE: "coded-regions"
+      LABELS: "regions,createRegion,programmatic"
+      PERCY_CSS: "nav { background: #fbbf24 !important; } footer { background: #fca5a5 !important; } h1 { color: #ec4899 !important; }"
+      # Output of scripts/build-regions.js — each region object produced
+      # by createRegion({boundingBox | elementCSS | elementXpath, algorithm, ...})
+      REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}},"padding":4},{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}},{"algorithm":"intelliignore","elementSelector":{"boundingBox":{"x":0,"y":600,"width":1280,"height":400}},"configuration":{"carouselsEnabled":true,"bannersEnabled":true,"adsEnabled":true}}]'

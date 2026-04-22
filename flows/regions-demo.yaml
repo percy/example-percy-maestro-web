@@ -1,0 +1,33 @@
+# Regions demo — all four algorithms (ignore / layout / standard / intelliignore)
+# with boundingBox, CSS-selector, and full intelliignore configuration.
+
+url: https://percy.io
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "regions-ignore-boundingBox"
+      TEST_CASE: "regions-demo"
+      LABELS: "regions,ignore,boundingBox"
+      PERCY_CSS: "nav { background: #fbbf24 !important; } h1 { color: #ec4899 !important; }"
+      REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}}}]'
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "regions-layout-css-selector"
+      TEST_CASE: "regions-demo"
+      LABELS: "regions,layout,cssSelector"
+      PERCY_CSS: "footer { background: #fca5a5 !important; padding: 40px !important; }"
+      REGIONS: '[{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}}]'
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "regions-intelliignore-tuned"
+      TEST_CASE: "regions-demo"
+      LABELS: "regions,intelliignore,tuned"
+      PERCY_CSS: "[class*='carousel'], [class*='banner'] { outline: 3px solid #3b82f6 !important; }"
+      REGIONS: '[{"algorithm":"intelliignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":600}},"configuration":{"diffSensitivity":1,"carouselsEnabled":true,"bannersEnabled":true,"adsEnabled":true},"assertion":{"diffIgnoreThreshold":0.1}}]'

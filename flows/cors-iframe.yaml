@@ -1,0 +1,21 @@
+# Cross-origin iframe serialization demo flow.
+#
+# Loads a page served from localhost:8000 that embeds two iframes from
+# different origins (httpbin.org, jsonplaceholder.typicode.com). The SDK
+# should detect both as cross-origin targets (via CDP Target.getTargets),
+# serialize each inside its own execution context, and attach the results
+# to domSnapshot.corsIframes — identical behavior to percy-playwright.
+#
+# Prerequisite: a static HTTP server serving ./public on port 8000.
+# The test-cors npm script handles this automatically.
+
+url: http://localhost:8000/cors-demo.html
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "cors-iframe-parent-page"
+      TEST_CASE: "cors-iframe-demo"
+      LABELS: "iframe,cross-origin,serialization"

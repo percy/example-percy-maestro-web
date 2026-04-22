@@ -1,0 +1,31 @@
+# Test cases + labels grouping demo. Creates one build with 3 snapshots
+# across 2 test-case groups and varied labels. In the Percy review UI,
+# open the "Test Cases" panel to see grouping; labels show as chips
+# under each snapshot thumbnail.
+
+url: https://percy.io
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "homepage-top"
+      TEST_CASE: "homepage"
+      LABELS: "smoke,critical-path,above-fold"
+
+- scroll
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "homepage-middle"
+      TEST_CASE: "homepage"
+      LABELS: "smoke,middle,features"
+
+- scroll
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "homepage-bottom"
+      TEST_CASE: "homepage-footer"
+      LABELS: "smoke,footer,below-fold"

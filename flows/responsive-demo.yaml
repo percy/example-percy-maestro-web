@@ -1,0 +1,18 @@
+# Responsive DOM capture demo — re-captures DOM at each width via CDP
+# Emulation.setDeviceMetricsOverride. Useful when responsive content
+# (srcset images, media-query-based components) differs per breakpoint.
+
+url: https://percy.io
+---
+- launchApp
+
+- runScript:
+    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    env:
+      NAME: "responsive-per-viewport-capture"
+      TEST_CASE: "responsive-demo"
+      LABELS: "responsive,viewport-emulation,multi-width"
+      WIDTHS: "375,768,1280"
+      RESPONSIVE: "true"
+      MIN_HEIGHT: "1200"
+      PERCY_CSS: "h1 { color: #ec4899 !important; } img { filter: hue-rotate(30deg) !important; }"
