@@ -8,7 +8,7 @@
 //
 // This is the same region set baked into flows/coded-regions.yaml.
 
-const { createRegion } = require('@percy/maestro');
+const { createRegion } = require('@percy/maestro-web');
 
 const regions = [
   // Ignore the top 80px nav area via coordinate-based boundingBox.

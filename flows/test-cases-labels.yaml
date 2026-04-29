@@ -8,7 +8,7 @@ url: https://percy.io
 - launchApp
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-top"
       TEST_CASE: "homepage"
@@ -16,7 +16,7 @@ url: https://percy.io
 
 - scroll
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-middle"
       TEST_CASE: "homepage"
@@ -24,7 +24,7 @@ url: https://percy.io
 
 - scroll
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-bottom"
       TEST_CASE: "homepage-footer"
