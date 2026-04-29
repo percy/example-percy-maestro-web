@@ -14,7 +14,7 @@ url: http://localhost:8000/cors-demo.html
 - launchApp
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "cors-iframe-parent-page"
       TEST_CASE: "cors-iframe-demo"

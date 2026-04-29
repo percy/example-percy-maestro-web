@@ -6,7 +6,7 @@ url: https://percy.io
 - launchApp
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-ignore-boundingBox"
       TEST_CASE: "regions-demo"
@@ -15,7 +15,7 @@ url: https://percy.io
       REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}}}]'
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-layout-css-selector"
       TEST_CASE: "regions-demo"
@@ -24,7 +24,7 @@ url: https://percy.io
       REGIONS: '[{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}}]'
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-intelliignore-tuned"
       TEST_CASE: "regions-demo"

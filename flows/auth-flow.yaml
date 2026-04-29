@@ -16,7 +16,7 @@ url: https://practicetestautomation.com/practice-test-login/
 - launchApp
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "page-login-form"
       TEST_CASE: "multi-page-nav"
@@ -25,7 +25,7 @@ url: https://practicetestautomation.com/practice-test-login/
 - openLink: https://practicetestautomation.com/logged-in-successfully/
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "page-logged-in-success"
       TEST_CASE: "multi-page-nav"

@@ -1,6 +1,6 @@
-# example-percy-maestro
+# example-percy-maestro-web
 
-Working examples of [`@percy/maestro`](../percy-maestro) for Maestro web flows. Each flow in `flows/` demonstrates a specific Percy feature, with a matching npm script and a reference Percy build so teammates can see each feature in isolation.
+Working examples of [`@percy/maestro-web`](../percy-maestro-web) for Maestro web flows. Each flow in `flows/` demonstrates a specific Percy feature, with a matching npm script and a reference Percy build so teammates can see each feature in isolation.
 
 ## Prerequisites
 
@@ -27,11 +27,11 @@ Working examples of [`@percy/maestro`](../percy-maestro) for Maestro web flows. 
 ## Setup
 
 ```sh
-cd ~/Desktop/percy/example-percy-maestro
+cd ~/Desktop/percy/example-percy-maestro-web
 yarn install
 ```
 
-The SDK is linked via `file:../percy-maestro`, so SDK edits are picked up on the next `yarn install`.
+The SDK is linked via `file:../percy-maestro-web`, so SDK edits are picked up on the next `yarn install`.
 
 ## One flow per feature
 
@@ -52,7 +52,7 @@ Each flow is self-contained. Run the npm script for the feature you want to demo
 ## Project layout
 
 ```
-example-percy-maestro/
+example-percy-maestro-web/
 ├── .percy.yml                  ← project defaults (widths, minHeight, ...)
 ├── package.json                ← npm scripts for each focused flow
 ├── scripts/
@@ -90,7 +90,7 @@ url: https://example.com
 ---
 - launchApp
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "Home"
 ```
@@ -103,7 +103,7 @@ The SDK exports a `createRegion()` helper matching `percy-playwright`'s exact sh
 
 ```js
 // scripts/build-regions.js
-const { createRegion } = require('@percy/maestro');
+const { createRegion } = require('@percy/maestro-web');
 
 const regions = [
   createRegion({
@@ -128,7 +128,7 @@ Run `yarn build-regions`, copy the JSON output into the `REGIONS:` env var in yo
 
 ## Cross-origin iframe demo
 
-The `test-cors` script starts a local `python3 -m http.server` on port 8000 serving `public/cors-demo.html` (which embeds iframes from `httpbin.org` and `jsonplaceholder.typicode.com` — different origins from `localhost`), runs `percy-maestro exec -- maestro test flows/cors-iframe.yaml`, then tears down the server.
+The `test-cors` script starts a local `python3 -m http.server` on port 8000 serving `public/cors-demo.html` (which embeds iframes from `httpbin.org` and `jsonplaceholder.typicode.com` — different origins from `localhost`), runs `percy-maestro-web exec -- maestro test flows/cors-iframe.yaml`, then tears down the server.
 
 In the resulting Percy build, the capture server's CDP `Target.getTargets` enumerates both iframe contexts and includes their serialized DOM under `domSnapshot.corsIframes` — identical behavior to `percy-playwright`.
 

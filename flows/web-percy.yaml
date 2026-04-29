@@ -12,7 +12,7 @@ url: https://percy.io
 # =============================================================================
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-hero"
       TEST_CASE: "homepage-smoke"
@@ -21,7 +21,7 @@ url: https://percy.io
 
 - scroll
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-features-section"
       TEST_CASE: "homepage-smoke"
@@ -30,7 +30,7 @@ url: https://percy.io
 
 - scroll
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "homepage-footer-area"
       TEST_CASE: "homepage-smoke"
@@ -45,7 +45,7 @@ url: https://percy.io
     element: "Your all-in-one visual review platform"
     direction: UP
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-ignore-by-box"
       WIDTHS: "1280"
@@ -55,7 +55,7 @@ url: https://percy.io
       REGIONS: '[{"algorithm":"ignore","elementSelector":{"boundingBox":{"x":0,"y":0,"width":1280,"height":80}},"padding":{"top":4,"right":4,"bottom":4,"left":4}}]'
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-layout-by-css"
       WIDTHS: "1280"
@@ -65,7 +65,7 @@ url: https://percy.io
       REGIONS: '[{"algorithm":"layout","elementSelector":{"elementCSS":"footer"}}]'
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "regions-intelliignore-configured"
       WIDTHS: "1280"
@@ -79,7 +79,7 @@ url: https://percy.io
 # =============================================================================
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "responsive-dom-capture"
       WIDTHS: "375,768,1280"
@@ -90,7 +90,7 @@ url: https://percy.io
       PERCY_CSS: "h1 { color: #ec4899 !important; border: 3px dashed #3b82f6 !important; } img { filter: hue-rotate(30deg) !important; }"
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "custom-percyCSS"
       WIDTHS: "1280"
@@ -104,7 +104,7 @@ url: https://percy.io
 # =============================================================================
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "scoped-navbar-only"
       WIDTHS: "1280"

@@ -1,24 +1,24 @@
 {
-  "name": "example-percy-maestro",
+  "name": "example-percy-maestro-web",
   "version": "0.0.1",
   "private": true,
   "description": "Example integration of Percy visual testing with the Maestro web testing framework",
   "scripts": {
-    "test-web": "percy-maestro exec -- maestro test flows/web-percy.yaml",
-    "test-auth": "percy-maestro exec -- maestro test flows/auth-flow.yaml",
-    "test-regions": "percy-maestro exec -- maestro test flows/regions-demo.yaml",
-    "test-coded-regions": "percy-maestro exec -- maestro test flows/coded-regions.yaml",
-    "test-responsive": "percy-maestro exec -- maestro test flows/responsive-demo.yaml",
-    "test-scoped": "percy-maestro exec -- maestro test flows/scoped-demo.yaml",
-    "test-cases-labels": "percy-maestro exec -- maestro test flows/test-cases-labels.yaml",
-    "test-cors": "bash -c 'python3 -m http.server 8000 --directory public >/tmp/cors-server.log 2>&1 & SRVPID=$!; sleep 2; percy-maestro exec -- maestro test flows/cors-iframe.yaml; RC=$?; kill $SRVPID 2>/dev/null; exit $RC'",
+    "test-web": "percy-maestro-web exec -- maestro test flows/web-percy.yaml",
+    "test-auth": "percy-maestro-web exec -- maestro test flows/auth-flow.yaml",
+    "test-regions": "percy-maestro-web exec -- maestro test flows/regions-demo.yaml",
+    "test-coded-regions": "percy-maestro-web exec -- maestro test flows/coded-regions.yaml",
+    "test-responsive": "percy-maestro-web exec -- maestro test flows/responsive-demo.yaml",
+    "test-scoped": "percy-maestro-web exec -- maestro test flows/scoped-demo.yaml",
+    "test-cases-labels": "percy-maestro-web exec -- maestro test flows/test-cases-labels.yaml",
+    "test-cors": "bash -c 'python3 -m http.server 8000 --directory public >/tmp/cors-server.log 2>&1 & SRVPID=$!; sleep 2; percy-maestro-web exec -- maestro test flows/cors-iframe.yaml; RC=$?; kill $SRVPID 2>/dev/null; exit $RC'",
     "test-all": "yarn test-web && yarn test-auth && yarn test-regions && yarn test-coded-regions && yarn test-responsive && yarn test-scoped && yarn test-cases-labels && yarn test-cors",
     "build-regions": "node scripts/build-regions.js",
     "clean": "rm -rf ./screenshots ~/.maestro/tests"
   },
   "devDependencies": {
     "@percy/cli": "^1.31.2",
-    "@percy/maestro": "file:../percy-maestro"
+    "@percy/maestro-web": "file:../percy-maestro-web"
   },
   "engines": {
     "node": ">=16"

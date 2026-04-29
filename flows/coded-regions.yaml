@@ -8,12 +8,12 @@ url: https://percy.io
 - launchApp
 
 - runScript:
-    file: ../node_modules/@percy/maestro/scripts/snapshot.js
+    file: ../node_modules/@percy/maestro-web/scripts/snapshot.js
     env:
       NAME: "coded-regions-demo"
       TEST_CASE: "coded-regions"
       LABELS: "regions,createRegion,programmatic"
-      PERCY_CSS: "nav { background: #fbbf24 !important; } footer { background: #fca5a5 !important; } h1 { color: #ec4899 !important; }"
+      PERCY_CSS: "nav { background: #22c55e !important; } footer { background: #3b82f6 !important; } h1 { color: #f97316 !important; }"
       # Produced by `node scripts/build-regions.js`. Per Percy's schema,
       # padding must be an object ({top, right, bottom, left}), not a
       # scalar — the helper handles this correctly.
