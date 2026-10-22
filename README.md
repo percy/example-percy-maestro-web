@@ -1,6 +1,6 @@
 # example-percy-maestro-web
 
-Working examples of [`@percy/maestro-web`](../percy-maestro-web) for Maestro web flows. Each flow in `flows/` demonstrates a specific Percy feature, with a matching npm script and a reference Percy build so teammates can see each feature in isolation.
+Working examples of [`@percy/maestro-web`](https://www.npmjs.com/package/@percy/maestro-web) for Maestro web flows. Each flow in `flows/` demonstrates a specific Percy feature, with a matching npm script and a reference Percy build so teammates can see each feature in isolation.
 
 ## Prerequisites
 
@@ -27,11 +27,12 @@ Working examples of [`@percy/maestro-web`](../percy-maestro-web) for Maestro web
 ## Setup
 
 ```sh
-cd ~/Desktop/percy/example-percy-maestro-web
+git clone https://github.com/percy/example-percy-maestro-web.git
+cd example-percy-maestro-web
 yarn install
 ```
 
-The SDK is linked via `file:../percy-maestro-web`, so SDK edits are picked up on the next `yarn install`.
+This installs the published [`@percy/maestro-web`](https://www.npmjs.com/package/@percy/maestro-web) SDK from npm. To develop against a local SDK checkout instead, run `yarn add -D @percy/maestro-web@file:../percy-maestro-web` (don't commit that change).
 
 ## One flow per feature
 
