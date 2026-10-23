@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@percy/cli": "^1.31.2",
-    "@percy/maestro-web": "file:../percy-maestro-web"
+    "@percy/maestro-web": "0.1.0-alpha.0"
   },
   "engines": {
     "node": ">=16"
